@@ -2,13 +2,16 @@ import React, { Component } from 'react';
 
 import Header from '../components/Header';
 import SearchBox from '../components/SearchBox';
+import CategoryList from '../components/CategoryList';
+
+import { buildArr } from '../utils/helpers';
 
 class AppContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
       queryObj: null,
-      results: null,
+      results: [],
     };
     this.handleSearch = this.handleSearch.bind(this);
   }
@@ -26,7 +29,7 @@ class AppContainer extends Component {
     .then((result) => {
       this.setState({ 
         queryObj: result,
-        results: result.query.pages
+        results: buildArr(result.query.pages)
       });
     })
     .catch(err => console.log(err));
@@ -47,6 +50,18 @@ class AppContainer extends Component {
             <SearchBox
               handleSearch={this.handleSearch}
             />
+          </div>
+        </div>
+
+        <div className="centered row">
+          <div className="ui eight colum wide">
+            { this.state.results.length ?
+              <CategoryList
+                categories={this.state.results}
+              />
+              :
+              ''
+            }
           </div>
         </div>
 
