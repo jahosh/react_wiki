@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint client/**",
-    "dev": "webpack-dev-server --progress --colors"
+    "dev": "webpack-dev-server --progress --colors",
+    "build": "NODE_ENV=production webpack --progress"
   },
   "dependencies": {
     "axios": "^0.16.1",
