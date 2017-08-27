@@ -1,4 +1,5 @@
 import React from 'react';
+import { debounce } from '../utils/helpers';
 
 const SearchBox = ({ handleSearch }) => {
   return (
@@ -7,6 +8,7 @@ const SearchBox = ({ handleSearch }) => {
         type="text"
         placeholder="Search Wikipedia..."
         onChange={handleSearch}
+        onKeyUp={handleSearch}
       />
       <i className="inverted circular search link icon" />
     </div>

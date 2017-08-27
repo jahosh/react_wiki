@@ -13,7 +13,8 @@ class AppContainer extends Component {
     this.state = {
       queryObj: null,
       results: [],
-      categoryMembers: []
+      categoryMembers: [],
+      currentCategory: ''
     };
     this.handleSearch = this.handleSearch.bind(this);
     this.handleFetchMembers = this.handleFetchMembers.bind(this);
@@ -30,7 +31,8 @@ class AppContainer extends Component {
       })
       .then((result) => {
         this.setState({
-          categoryMembers: result.query.categorymembers
+          categoryMembers: result.query.categorymembers,
+          currentCategory: category
         });
       })
       .catch(e => console.log(e));
@@ -51,17 +53,18 @@ class AppContainer extends Component {
       return resp.json();
     })
     .then((result) => {
-      this.setState({ 
-        queryObj: result,
-        results: buildArr(result.query.pages)
-      });
+      if (result.query) {
+        this.setState({
+          queryObj: result,
+          results: buildArr(result.query.pages)
+        });
+      }
     })
     .catch(err => console.log(err));
   }
 
   render() {
-    const { results, categoryMembers } = this.state;
-    console.log(categoryMembers);
+    const { results, categoryMembers, currentCategory } = this.state;
     return (
       <div className="ui grid container centered">
         <div className="row">
@@ -95,10 +98,11 @@ class AppContainer extends Component {
 
         <div className="row">
           <div className="ui sixteen colum">
-            { categoryMembers.length ?
+            { categoryMembers.length || currentCategory ?
               <div>
                 <MemberList
                   members={categoryMembers}
+                  category={currentCategory}
                 />
               </div>
               :
