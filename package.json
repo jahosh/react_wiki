@@ -6,6 +6,7 @@
   "scripts": {
     "lint": "eslint client/**",
     "dev": "webpack-dev-server --progress --colors",
+    "serve": "python3 app.py",
     "build": "NODE_ENV=production webpack --progress",
     "test": "jest"
   },
