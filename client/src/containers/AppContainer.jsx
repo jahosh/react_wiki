@@ -98,7 +98,7 @@ class AppContainer extends Component {
 
         <div className="row">
           <div className="ui sixteen colum">
-            { categoryMembers.length || currentCategory ?
+            { categoryMembers.length ?
               <div>
                 <MemberList
                   members={categoryMembers}
