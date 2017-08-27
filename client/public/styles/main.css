@@ -1,0 +1,14 @@
+#header {
+  text-align: center;
+}
+.created-at-text {
+  float:left;
+}
+.category-title {
+  margin-bottom: 10px;
+  color: black;
+}
+#member-list {
+  margin-top: 100px;
+  border-top: 2px solid black;
+}

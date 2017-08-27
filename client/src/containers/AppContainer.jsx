@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import Header from '../components/Header';
 import SearchBox from '../components/SearchBox';
 import CategoryList from '../components/CategoryList';
+import MemberList from '../components/MemberList';
 
 import { buildArr } from '../utils/helpers';
 
@@ -12,13 +13,36 @@ class AppContainer extends Component {
     this.state = {
       queryObj: null,
       results: [],
+      categoryMembers: []
     };
     this.handleSearch = this.handleSearch.bind(this);
+    this.handleFetchMembers = this.handleFetchMembers.bind(this);
+  }
+
+  showMembers() {
+    const members = this.state.categoryMembers;
+
+  }
+  handleFetchMembers(category) {
+    fetch(`https://en.wikipedia.org/w/api.php?action=query&format=json&origin=*&list=categorymembers&cmtitle=${category}&cmprop=ids|title|timestamp|type`)
+      .then((resp) => {
+        return resp.json();
+      })
+      .then((result) => {
+        this.setState({
+          categoryMembers: result.query.categorymembers
+        });
+      })
+      .catch(e => console.log(e));
   }
 
   handleSearch(e) {
     const query = e.target.value;
-    if (query.length < 2) {
+    if (query.length < 3) {
+      this.setState({
+        results: [],
+        categoryMembers: []
+      });
       return;
     }
 
@@ -36,35 +60,52 @@ class AppContainer extends Component {
   }
 
   render() {
-    console.log(this.state);
+    const { results, categoryMembers } = this.state;
+    console.log(categoryMembers);
     return (
-      <div className="ui grid">
+      <div className="ui grid container centered">
         <div className="row">
-          <div className="ui four column centered grid">
+          <div className="ui eight column ">
             <Header />
           </div>
         </div>
 
-        <div className="centered row">
-          <div className="ui four colum wide">
+        <div className="row">
+          <div className="ui eight colum ">
             <SearchBox
               handleSearch={this.handleSearch}
             />
           </div>
         </div>
 
-        <div className="centered row">
-          <div className="ui eight colum wide">
+        <div className="row">
+          <div className="ui eight colum">
             { this.state.results.length ?
-              <CategoryList
-                categories={this.state.results}
-              />
+              <div>
+                <CategoryList
+                  categories={results}
+                  handleFetchMembers={this.handleFetchMembers}
+                />
+              </div>
               :
               ''
             }
           </div>
         </div>
 
+        <div className="row">
+          <div className="ui sixteen colum">
+            { categoryMembers.length ?
+              <div>
+                <MemberList
+                  members={categoryMembers}
+                />
+              </div>
+              :
+              ''
+            }
+          </div>
+        </div>
       </div>
     );
   }

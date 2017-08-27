@@ -2,7 +2,7 @@ import React from 'react';
 
 const SearchBox = ({ handleSearch }) => {
   return (
-    <div className="ui icon input">
+    <div className="ui huge icon input">
       <input
         type="text"
         placeholder="Search Wikipedia..."
