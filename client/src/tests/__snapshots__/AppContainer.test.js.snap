@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AppContainer renders properly 1`] = `
+<div
+  className="ui grid container centered"
+>
+  <div
+    className="row"
+  >
+    <div
+      className="ui eight column "
+    >
+      <div
+        id="header"
+      >
+        <h1>
+           React-Wiki
+        </h1>
+        <div
+          className="sub-header"
+        >
+          Josh Hickman's front-end candidate submission
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="row"
+  >
+    <div
+      className="ui eight colum "
+    >
+      <div
+        className="ui huge icon input"
+      >
+        <input
+          onChange={[Function]}
+          onKeyUp={[Function]}
+          placeholder="Search Wikipedia..."
+          type="text"
+        />
+        <i
+          className="inverted circular search link icon"
+        />
+      </div>
+    </div>
+  </div>
+  <div
+    className="row"
+  >
+    <div
+      className="ui eight colum"
+    >
+      
+    </div>
+  </div>
+  <div
+    className="row"
+  >
+    <div
+      className="ui sixteen colum"
+    >
+      
+    </div>
+  </div>
+</div>
+`;
