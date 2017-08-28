@@ -20,10 +20,6 @@ class AppContainer extends Component {
     this.handleFetchMembers = this.handleFetchMembers.bind(this);
   }
 
-  showMembers() {
-    const members = this.state.categoryMembers;
-
-  }
   handleFetchMembers(category) {
     fetch(`https://en.wikipedia.org/w/api.php?action=query&format=json&origin=*&list=categorymembers&cmtitle=${category}&cmprop=ids|title|timestamp|type`)
       .then((resp) => {
